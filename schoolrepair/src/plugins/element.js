@@ -19,7 +19,12 @@ import {
     Card,
     Table,
     TableColumn,
-    Tag
+    Tag,
+    Select,
+    Option,
+    RadioGroup,
+    Radio,
+    Pagination
 
 
 } from 'element-ui';
@@ -43,6 +48,11 @@ Vue.use(Card)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Tag)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(RadioGroup)
+Vue.use(Radio)
+Vue.use(Pagination)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox

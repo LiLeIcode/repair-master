@@ -17,6 +17,7 @@
         <el-form-item>
           <el-button size="medium" @click="login">登录</el-button>
           <el-button size="medium" @click="dialogVisible = true">注册</el-button>
+
         </el-form-item>
         <!-- 注册 -->
         <el-dialog title="普通注册" :visible.sync="dialogVisible" width="400px">

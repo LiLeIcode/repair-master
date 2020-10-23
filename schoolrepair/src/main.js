@@ -4,7 +4,9 @@ import router from './router'
 import "element-ui/lib/theme-chalk/index.css"
 import "./plugins/element";
 import axios from "axios"
+import util from "./util/util"
 
+Vue.prototype.utils = util
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 

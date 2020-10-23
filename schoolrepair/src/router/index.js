@@ -6,7 +6,7 @@ import AllCompletedRepair from '../views/AllCompletedRepair.vue'
 import AllEmployeeInfo from '../views/AllEmployeeInfo.vue'
 import AllRepairs from '../views/AllRepairs.vue'
 import DataReport from '../views/DataReport.vue'
-import FinishTheTask from '../views/FinishTheTask.vue'
+import MyTask from '../views/MyTask.vue'
 import Handle from '../views/Handle.vue'
 import ImportAndExport from '../views/ImportAndExport.vue'
 import ImportAndExportInfo from '../views/ImportAndExportInfo.vue'
@@ -35,7 +35,7 @@ const routes = [
             { path: '/reportForRepair', component: ReportForRepair },
             { path: '/handle', component: Handle },
             { path: '/repairTask', component: RepairTask },
-            { path: '/finishTheTask', component: FinishTheTask },
+            { path: '/myTask', component: MyTask },
             { path: '/maintenancePickUp', component: MaintenancePickUp },
             { path: '/allRepairs', component: AllRepairs },
             { path: '/allCompletedRepair', component: AllCompletedRepair },

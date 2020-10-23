@@ -29,12 +29,19 @@
         <el-table-column label="报修时间">
           <template slot-scope="scope">
             <div>
-              <span>{{formatTime(scope.row.dateTime,'yyyy-MM-dd hh:mm:ss')}}</span>
+              <span>{{utils.formatTime(scope.row.dateTime,'yyyy-MM-dd hh:mm:ss')}}</span>
             </div>
           </template>
         </el-table-column>
       </el-table>
-      <h1 style="margin-top:10px">所有报修记录</h1>
+      <el-pagination
+        background
+        @current-change="handleCurrentChange"
+        layout="prev, pager, next"
+        :current-page="pageNum"
+        :total="100"
+      ></el-pagination>
+      <h1 style="margin-top:5px">所有报修记录</h1>
     </el-card>
   </div>
 </template>
@@ -43,46 +50,31 @@
 export default {
   data() {
     return {
-      tableData: []
+      tableData: [],
+      pageNum: 1,
+      size: 10
     };
   },
   created() {
-    this.getAllRepair();
+    this.getAllRepair(this.pageNum, this.size);
   },
   methods: {
-    async getAllRepair() {
+    handleCurrentChange(val) {
+      this.getAllRepair(val, this.size);
+    },
+
+    async getAllRepair(pageNum, size) {
       const { data: res } = await this.$http.get(
-        "http://localhost:5000/api/Repair/allRepair"
+        "http://localhost:5000/api/Repair/allRepair",
+        {
+          params: {
+            pageNum: pageNum,
+            size: size
+          }
+        }
       );
       console.log(res.responseInfo);
-      for (let i = 0; i < res.responseInfo.length; i++)
-        this.tableData.push(res.responseInfo[i]);
-    },
-    formatTime(date, fmt) {
-      var date = new Date(date);
-      if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(
-          RegExp.$1,
-          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
-        );
-      }
-      var o = {
-        "M+": date.getMonth() + 1,
-        "d+": date.getDate(),
-        "h+": date.getHours(),
-        "m+": date.getMinutes(),
-        "s+": date.getSeconds()
-      };
-      for (var k in o) {
-        if (new RegExp("(" + k + ")").test(fmt)) {
-          var str = o[k] + "";
-          fmt = fmt.replace(
-            RegExp.$1,
-            RegExp.$1.length === 1 ? str : ("00" + str).substr(str.length)
-          );
-        }
-      }
-      return fmt;
+      this.tableData = res.responseInfo;
     }
   }
 };
