@@ -64,7 +64,7 @@ export default {
     },
 
     async getAllRepair(pageNum, size) {
-      const { data: res } = await this.$http.get(
+      const  {data:res} = await this.$http.get(
         "http://localhost:5000/api/Repair/allRepair",
         {
           params: {

@@ -117,12 +117,7 @@ export default {
       this.commentValue.reportForRepairId = param;
     },
     async subEvaluate() {
-      // const { data: res } = await this.$http.post(
-      //   "http://localhost:5000/api/Repair/comment?reportForRepairId=" +
-      //     param1 +
-      //     "&evaluate=" +
-      //     param2
-      // );
+      
       console.log(this.commentValue);
       const { data: res } = await this.$http.post(
         "http://localhost:5000/api/Repair/comment",

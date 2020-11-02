@@ -12,11 +12,11 @@
             <div>
               <el-tag type="info" v-if="scope.row.waitHandle===0">未处理</el-tag>
               <el-tag v-else-if="scope.row.waitHandle===1">正在处理</el-tag>
-              <el-tag type="success" v-else-if="scope.row.waitHandle===2">处理完成</el-tag>
+              <!-- <el-tag type="success" v-else-if="scope.row.waitHandle===2">处理完成</el-tag> -->
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="评论">
+        <!-- <el-table-column label="评论">
           <template slot-scope="scope">
             <div>
               <el-tag type="info" v-if="scope.row.evaluate===0">暂无评论</el-tag>
@@ -25,7 +25,7 @@
               <el-tag type="success" v-else-if="scope.row.evaluate===1">好评</el-tag>
             </div>
           </template>
-        </el-table-column>
+        </el-table-column>-->
         <el-table-column label="报修时间">
           <template slot-scope="scope">
             <div>
@@ -47,10 +47,10 @@
               <el-button
                 type="primary"
                 size="mini"
-                v-if="scope.row.waitHandle===1"
-                @click="finishTheTask(scope.row.id)"
-              >完成任务</el-button>
-              <el-button type="info" size="mini" v-if="scope.row.waitHandle!==1" disabled>完成任务</el-button>
+                v-if="scope.row.waitHandle===1&&(scope.row.workerId===scope.row.loginUserId)"
+                @click="abortMission(scope.row.id)"
+              >中止任务</el-button>
+              <el-button type="info" size="mini" v-if="scope.row.waitHandle!==1" disabled>中止任务</el-button>
             </div>
           </template>
         </el-table-column>
@@ -73,7 +73,7 @@ export default {
     return {
       tableData: [],
       pageNum: 1,
-      size: 10,
+      size: 10
     };
   },
   created() {
@@ -81,11 +81,11 @@ export default {
   },
   methods: {
     handleCurrentChange(val) {
-      
       this.pageNum = val; //记录当前页码
-      this.getAllRepair(this.pageNum , this.size);
+      this.getAllRepair(this.pageNum, this.size);
     },
     async getAllRepair(pageNum, size) {
+      this.tableData = [];
       const { data: res } = await this.$http.get(
         "http://localhost:5000/api/Repair/allRepair",
         {
@@ -96,7 +96,12 @@ export default {
         }
       );
       console.log(res.responseInfo);
-      this.tableData = res.responseInfo;
+      for (var i = 0; i < res.responseInfo.length; i++) {
+        if (res.responseInfo[i].waitHandle != 2) {
+          this.tableData.push(res.responseInfo[i]);
+        }
+      }
+      //this.tableData = res.responseInfo;
     },
     async acceptTask(param) {
       console.log(param);
@@ -116,7 +121,23 @@ export default {
       }
       console.log(res);
     },
-
+    //中止任务
+    async abortMission(param) {
+      const { data: res } = await this.$http.get(
+        "http://localhost:5000/api/RoleReportForRepair/abortMission",
+        {
+          params: { repairId: param }
+        }
+      );
+      console.log(res);
+      if (res.status != 200) {
+        return this.$message.error("放弃任务失败");
+      } else {
+        this.getAllRepair(this.pageNum, this.size);
+        return this.$message.success("放弃任务成功");
+      }
+    },
+    //完成任务
     async finishTheTask(param) {
       const { data: res } = await this.$http.get(
         "http://localhost:5000/api/RoleReportForRepair/completeTask",
