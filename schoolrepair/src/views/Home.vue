@@ -4,7 +4,7 @@
     <el-container>
       <el-header>
         <div class="grid-content bg-purple-dark">
-          <img src="//game.gtimg.cn/images/lol/v3/logo-public.png" alt />
+          <img src="../assets/logo.png" alt  style="height:60px;"/>
           <el-menu
             :default-active="activeIndex"
             class="el-menu-demo"

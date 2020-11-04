@@ -24,12 +24,16 @@ import {
     Option,
     RadioGroup,
     Radio,
-    Pagination
+    Pagination,
+    Carousel,
+    CarouselItem
 
 
 } from 'element-ui';
 
 
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)

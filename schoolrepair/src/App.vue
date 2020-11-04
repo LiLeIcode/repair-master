@@ -11,5 +11,10 @@
 margin: 0;
 padding: 0;
 box-sizing: border-box;
+
+}
+html{
+height: 100%;
+overflow: hidden;
 }
 </style>

@@ -69,6 +69,7 @@ export default {
         "http://localhost:5000/api/DataReport/ptComment"
       );
       if (res.status != 200) {
+this.$message.duration=500;
         return this.$message.error("获取数据失败");
       } else {
         this.dataUserCommit = res.responseInfo;

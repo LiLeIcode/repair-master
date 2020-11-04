@@ -60,14 +60,14 @@ export default {
   data() {
     return {
       loginData: {
-        userName: "111",
-        password: "111"
+        userName: "",
+        password: ""
       },
       registerData: {
         userName: "",
         password: "",
-        phone: "18307001845",
-        mail: "2424117373@qq.com"
+        phone: "",
+        mail: ""
       },
       rules: {
         userName: [
@@ -210,7 +210,7 @@ export default {
   overflow: hidden;
   width: 100%;
   height: 938px;
-  background-position: center;
+  //background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   font-size: 50px;
@@ -221,13 +221,16 @@ export default {
     width: 450px;
     height: 250px;
     top: 250px;
-    margin: auto;
+left:65%;
+    //margin: auto;
+background-color: rgba(13, 14, 13, 0.6);
     .el-form {
       position: relative;
-      margin-top: 20px;
+      margin-top: 35px;
+
       .el-form-item {
         .el-button {
-          background-color: rgba(246, 250, 243, 0.7);
+          //background-color: rgba(246, 250, 243, 0.7);
           margin-left: 45px;
         }
         /deep/ .el-form-item__label {
@@ -241,8 +244,8 @@ export default {
         }
         /deep/ .el-input__inner {
           //width: 300px;
-          background-color: rgba(141, 49, 49, 0.5);
-          color: mediumpurple;
+         // background-color: rgba(141, 49, 49, 0.5);
+          color: black;
         }
       }
       /deep/.el-dialog__body {

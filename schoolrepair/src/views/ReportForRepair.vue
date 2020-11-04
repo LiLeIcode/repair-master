@@ -1,8 +1,8 @@
 <template>
   <div class="reportForRepair">
     <el-card>
-      <el-form ref="formRef" :model="repairData" label-width="80px">
-        <el-form-item label="栋" style="width:500px">
+      <el-form ref="formRef" :model="repairData" label-width="80px" :rules="repairRule">
+        <el-form-item label="栋" style="width:500px" prop="tung">
           <el-select v-model="repairData.tung" placeholder="请选择">
             <el-option
               v-for="item in tungList"
@@ -15,7 +15,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="层">
+        <el-form-item label="层" prop="layer">
           <el-select v-model="repairData.layer" placeholder="请选择">
             <el-option
               v-for="item in layerList"
@@ -28,10 +28,10 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="寝室号">
+        <el-form-item label="寝室号" prop="dorm">
           <el-input v-model="repairData.dorm"></el-input>
         </el-form-item>
-        <el-form-item label="描述">
+        <el-form-item label="描述" prop="desc">
           <el-input v-model="repairData.desc"></el-input>
         </el-form-item>
         <el-form-item>
@@ -69,23 +69,33 @@ export default {
         tung: "",
         dorm: "",
         desc: ""
+      },
+      repairRule: {
+        layer: [{ required: true, message: "请选择楼层", trigger: "blur" }],
+        tung: [{ required: true, message: "请选择栋", trigger: "blur" }],
+        dorm: [{ required: true, message: "请输入寝室号", trigger: "blur" }],
+        desc: [{ required: true, message: "请输入描述", trigger: "blur" }]
       }
     };
   },
   methods: {
     async submitRepair() {
       console.log(this.repairData);
-      const { data: res } = await this.$http.post(
-        "http://localhost:5000/api/Repair/repair",
-        this.repairData
-      );
-      if (res.status != 200) {
-        return this.$message.error("提交失败");
-      } else {
-        this.clearForm();
-        return this.$message.success("提交成功");
-      }
-      console.log(res);
+      this.$refs.formRef.validate(async valid => {
+        if (valid) {
+          const { data: res } = await this.$http.post(
+            "http://localhost:5000/api/Repair/repair",
+            this.repairData
+          );
+          if (res.status != 200) {
+            return this.$message.error("提交失败");
+          } else {
+            this.clearForm();
+            return this.$message.success("提交成功");
+          }
+          console.log(res);
+        }
+      });
     },
     clearForm() {
       this.repairData.tung = this.repairData.layer = this.repairData.dorm = this.repairData.desc =
@@ -105,6 +115,7 @@ export default {
   /deep/ .el-input__inner {
     //position: relative;
     width: 300px;
+    margin-left: -100px;
   }
 }
 </style>
