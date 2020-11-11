@@ -4,20 +4,20 @@
       <div slot="header"></div>
       <div>
         <el-carousel height="700px">
-          <el-carousel-item >
-            <img src="../assets/lunbo1.jpg" alt  style="height:100%;width:100%"/>
+          <el-carousel-item>
+            <img src="../assets/lunbo1.jpg" alt style="height:100%;width:100%" />
           </el-carousel-item>
           <el-carousel-item>
-            <img src="../assets/lunbo2.jpg" alt style="height:100%;width:100%"/>
+            <img src="../assets/lunbo2.jpg" alt style="height:100%;width:100%" />
           </el-carousel-item>
           <el-carousel-item>
-            <img src="../assets/lunbo3.jpg" alt style="height:100%;width:100%"/>
+            <img src="../assets/lunbo3.jpg" alt style="height:100%;width:100%" />
           </el-carousel-item>
           <el-carousel-item>
-            <img src="../assets/lunbo4.jpg" alt style="height:100%;width:100%"/>
+            <img src="../assets/lunbo4.jpg" alt style="height:100%;width:100%" />
           </el-carousel-item>
           <el-carousel-item>
-            <img src="../assets/lunbo5.jpg" alt style="height:100%;width:100%"/>
+            <img src="../assets/lunbo5.jpg" alt style="height:100%;width:100%" />
           </el-carousel-item>
         </el-carousel>
       </div>

@@ -84,7 +84,7 @@ export default {
         reportForRepairId: ""
       },
       pageNum: 1,
-      size: 10,
+      size: 10
     };
   },
   created() {
@@ -117,7 +117,6 @@ export default {
       this.commentValue.reportForRepairId = param;
     },
     async subEvaluate() {
-      
       console.log(this.commentValue);
       const { data: res } = await this.$http.post(
         "http://localhost:5000/api/Repair/comment",
@@ -127,12 +126,19 @@ export default {
       console.log(res);
 
       if (res.status != 200) {
-        this.$message.error("提交失败");
+        return this.$message({
+          type: "error",
+          message: "提交失败",
+          duration: 500
+        });
       } else {
-        this.$message.success("提交成功");
-
         this.getMyRepairRecord(this.pageNum, this.size);
         this.dialogVisible = false;
+        return this.$message({
+          type: "success",
+          message: "提交成功",
+          duration: 500
+        });
       }
     }
   }

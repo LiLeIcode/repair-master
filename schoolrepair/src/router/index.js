@@ -2,8 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
-import AllCompletedRepair from '../views/AllCompletedRepair.vue'
-import AllEmployeeInfo from '../views/AllEmployeeInfo.vue'
 import AllRepairs from '../views/AllRepairs.vue'
 import DataReport from '../views/DataReport.vue'
 import MyTask from '../views/MyTask.vue'
@@ -38,12 +36,10 @@ const routes = [
             { path: '/myTask', component: MyTask },
             { path: '/maintenancePickUp', component: MaintenancePickUp },
             { path: '/allRepairs', component: AllRepairs },
-            { path: '/allCompletedRepair', component: AllCompletedRepair },
             { path: '/importAndExport', component: ImportAndExport },
             { path: '/importAndExportInfo', component: ImportAndExportInfo },
             { path: '/power', component: Power },
             { path: '/modifyEmployee', component: ModifyEmployee },
-            { path: '/allEmployeeInfo', component: AllEmployeeInfo },
             { path: '/dataReport', component: DataReport },
         ]
     },

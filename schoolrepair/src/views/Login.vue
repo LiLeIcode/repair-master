@@ -17,7 +17,6 @@
         <el-form-item>
           <el-button size="medium" @click="login">登录</el-button>
           <el-button size="medium" @click="dialogVisible = true">注册</el-button>
-
         </el-form-item>
         <!-- 注册 -->
         <el-dialog title="普通注册" :visible.sync="dialogVisible" width="400px">
@@ -54,6 +53,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Schema from "async-validator";
 export default {
@@ -125,7 +125,11 @@ export default {
           }
         ],
         phone: [
-          { required: true, message: "请输入手机号码", trigger: "blur" },
+          {
+            required: true,
+            message: "请输入手机号码",
+            trigger: "blur"
+          },
           {
             validator: function(rule, value, callback) {
               if (/^1[34578]\d{9}$/.test(value) == false) {
@@ -138,7 +142,11 @@ export default {
           }
         ],
         email: [
-          { required: true, message: "请输入邮箱号", trigger: "blur" },
+          {
+            required: true,
+            message: "请输入邮箱号",
+            trigger: "blur"
+          },
           {
             trigger: "blur",
             validator: function(rule, value, callback) {
@@ -173,7 +181,11 @@ export default {
           if (res.status != 200) {
             return this.$message.error("登陆失败");
           } else {
-            this.$message.success("登陆成功");
+            this.$message({
+              type: "success",
+              message: "登录成功",
+              duration: 500
+            });
             window.sessionStorage.setItem(
               "token",
               res.responseInfo.token_type + " " + res.responseInfo.token
@@ -204,6 +216,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .login-background {
   background-image: url("../assets/loginbackground.jpg");
@@ -214,6 +227,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   font-size: 50px;
+
   .login-frame {
     position: relative;
     border: 1px solid #ccc;
@@ -221,9 +235,10 @@ export default {
     width: 450px;
     height: 250px;
     top: 250px;
-left:65%;
+    left: 65%;
     //margin: auto;
-background-color: rgba(13, 14, 13, 0.6);
+    background-color: rgba(13, 14, 13, 0.6);
+
     .el-form {
       position: relative;
       margin-top: 35px;
@@ -233,21 +248,25 @@ background-color: rgba(13, 14, 13, 0.6);
           //background-color: rgba(246, 250, 243, 0.7);
           margin-left: 45px;
         }
+
         /deep/ .el-form-item__label {
           font-size: 16px;
           font-family: "微软雅黑";
           color: mediumpurple;
         }
+
         /deep/.el-input {
           width: 300px;
           margin-top: 5px;
         }
+
         /deep/ .el-input__inner {
           //width: 300px;
-         // background-color: rgba(141, 49, 49, 0.5);
+          // background-color: rgba(141, 49, 49, 0.5);
           color: black;
         }
       }
+
       /deep/.el-dialog__body {
         padding: 10px;
       }

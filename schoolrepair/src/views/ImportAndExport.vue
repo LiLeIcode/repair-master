@@ -28,7 +28,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <!-- <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               type="primary"
@@ -36,7 +36,7 @@
               @click="dialogVisible=true;currentId=scope.row.id"
             >取出货物</el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
       <el-pagination
         background
@@ -95,7 +95,11 @@ export default {
       } else {
         this.getAllGoods(this.pageNum, this.size);
 
-        return this.$message.success("添加完成");
+        return this.$message({
+          type: "success",
+          message: "添加成功",
+          duration: 500
+        });
       }
     },
     async getOutGoods(currentId, takeOutNumber) {
@@ -114,7 +118,11 @@ export default {
         return this.$message.error("请求失败");
       } else {
         this.getAllGoods(this.pageNum, this.size);
-        return this.$message.success("取出成功");
+        return this.$message({
+          type: "success",
+          message: "取出成功",
+          duration: 500
+        });
       }
     },
 

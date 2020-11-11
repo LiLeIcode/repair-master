@@ -48,7 +48,7 @@ export default {
         this.dataQC = res.responseInfo;
         console.log(this.dataQC.arrayT);
         this.QCechart();
-        return this.$message.success("获取数据成功");
+        //return this.$message.success("获取数据成功");
       }
     },
     async getUserProp() {
@@ -61,7 +61,7 @@ export default {
         this.dataUserProp = res.responseInfo;
         console.log(this.dataUserProp);
         this.userPropechart();
-        return this.$message.success("获取数据成功");
+        //return this.$message.success("获取数据成功");
       }
     },
     async getUserCommit() {
@@ -75,7 +75,7 @@ this.$message.duration=500;
         this.dataUserCommit = res.responseInfo;
         console.log(this.dataUserCommit);
         this.userCommitchart();
-        return this.$message.success("获取数据成功");
+       // return this.$message.success("获取数据成功");
       }
     },
     userCommitchart() {

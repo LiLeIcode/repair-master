@@ -80,7 +80,11 @@ export default {
         return this.$message.error("请求失败");
       } else {
         this.getAllUser(this.pageNum, this.size);
-        return this.$message.success("修改权限成功");
+        return this.$message({
+          type: "success",
+          message: "修改权限成功",
+          duration: 500
+        });
       }
     },
 

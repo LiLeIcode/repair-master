@@ -91,7 +91,11 @@ export default {
             return this.$message.error("提交失败");
           } else {
             this.clearForm();
-            return this.$message.success("提交成功");
+            return this.$message({
+          type: "success",
+          message: "提交成功",
+          duration: 500
+        });
           }
           console.log(res);
         }

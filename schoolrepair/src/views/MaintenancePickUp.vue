@@ -17,7 +17,7 @@
             <el-button
               type="primary"
               size="mini"
-              @click="dialogVisible=true;currentId=scope.row.id"
+              @click="dialogVisible=true;currentId=scope.row.id;getMyHITATask()"
             >取出货物</el-button>
           </template>
         </el-table-column>
@@ -30,6 +30,15 @@
         :total="100"
       ></el-pagination>
       <el-dialog title :visible.sync="dialogVisible" width="30%">
+        <div>请选择任务</div>
+        <el-select v-model="selectValue" placeholder="请选择">
+          <el-option
+            v-for="item in myHITATask"
+            :key="item.id"
+            :label="item.tung+item.layer+item.dorm+item.desc"
+            :value="item.id"
+          ></el-option>
+        </el-select>
         <div>请输入要取走的数量</div>
         <el-input v-model.number="takeOutNumber" placeholder="10"></el-input>
         <div slot="footer">
@@ -44,6 +53,8 @@
 export default {
   data() {
     return {
+      selectValue: "",
+      myHITATask: [],
       tableData: [],
       pageNum: 1,
       size: 10,
@@ -84,12 +95,14 @@ export default {
     },
     async getOutGoods(currentId, takeOutNumber) {
       this.dialogVisible = false;
+      console.log(this.selectValue);
       const { data: res } = await this.$http.get(
         "http://localhost:5000/api/WareHouse/takeOutGoods",
         {
           params: {
             goodsId: currentId,
-            number: takeOutNumber
+            number: takeOutNumber,
+            workerId: this.selectValue
           }
         }
       );
@@ -98,10 +111,13 @@ export default {
         return this.$message.error("请求失败");
       } else {
         this.getAllGoods(this.pageNum, this.size);
-        return this.$message.success("取出成功");
+        return this.$message({
+          type: "success",
+          message: "获取成功",
+          duration: 500
+        });
       }
     },
-
     async getAllGoods(pageNum, size) {
       const { data: res } = await this.$http.get(
         "http://localhost:5000/api/WareHouse/allGoods",
@@ -118,6 +134,26 @@ export default {
         return this.$message.error("获取失败");
       } else {
         this.tableData = res.responseInfo;
+      }
+    },
+    async getMyHITATask() {
+      const { data: res } = await this.$http.get(
+        "http://localhost:5000/api/RoleReportForRepair/myHITATask"
+      );
+      console.log(res);
+      if (res.status != 200) {
+        return this.$message({
+          type: "error",
+          message: "获取失败",
+          duration: 500
+        });
+      } else {
+        this.myHITATask = res.responseInfo;
+        return this.$message({
+          type: "success",
+          message: "获取成功",
+          duration: 500
+        });
       }
     }
   }

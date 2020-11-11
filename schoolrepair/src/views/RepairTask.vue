@@ -117,7 +117,11 @@ export default {
         return this.$message.error("接单失败");
       } else {
         this.getAllRepair(this.pageNum, this.size);
-        return this.$message.success("接单成功");
+        return this.$message({
+          type: "success",
+          message: "接单成功",
+          duration: 500
+        });
       }
       console.log(res);
     },
@@ -134,7 +138,11 @@ export default {
         return this.$message.error("放弃任务失败");
       } else {
         this.getAllRepair(this.pageNum, this.size);
-        return this.$message.success("放弃任务成功");
+        return this.$message({
+          type: "success",
+          message: "放弃任务成功",
+          duration: 500
+        });
       }
     },
     //完成任务
@@ -149,7 +157,11 @@ export default {
         return this.$message.error("结束失败");
       } else {
         this.getAllRepair(this.pageNum, this.size);
-        return this.$message.success("完成任务");
+        return this.$message({
+          type: "success",
+          message: "完成任务",
+          duration: 500
+        });
       }
       console.log(res);
     }

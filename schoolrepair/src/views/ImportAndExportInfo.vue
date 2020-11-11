@@ -22,7 +22,7 @@
         :current-page="pageNum"
         :total="100"
       ></el-pagination>
-      <h1 style="margin-top:5px">所有报修记录</h1>
+      <h1 style="margin-top:5px">材料领取记录</h1>
     </el-card>
   </div>
 </template>
